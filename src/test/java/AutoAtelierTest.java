@@ -10,6 +10,9 @@ class AutoAtelierTest {
     private List<Order>         orders;
     private Set<Long>           favorites;
 
+
+
+
     @BeforeEach
     void setUp() {
         services = List.of(
@@ -26,6 +29,9 @@ class AutoAtelierTest {
         );
         favorites = new HashSet<>();
     }
+
+
+
     @Test
     void tc01_filter_byCategory_returnsMatching() {
         String cat = "Двигатель";
