@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.chart.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      prefWidth="1200" prefHeight="800"
+      fx:controller="com.autoatelier.controller.admin.AdminStatisticsController"
+      styleClass="app-root" spacing="0">
+
+    <HBox styleClass="topbar-header topbar-admin" alignment="CENTER_LEFT" spacing="12">
+        <Label text="🚗 Ателье Автомобилей" styleClass="topbar-logo"/>
+        <Label text="Администратор" styleClass="topbar-role-badge topbar-role-admin"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Label fx:id="userNameLabel" styleClass="topbar-username" visible="false" managed="false"/>
+        <Button text="Выйти" styleClass="topbar-logout-btn" onAction="#handleLogout"/>
+    </HBox>
+
+    <HBox styleClass="topbar-nav" spacing="0">
+        <Button text="Пользователи" styleClass="nav-tab"                onAction="#goToUsers"/>
+        <Button text="Услуги"       styleClass="nav-tab"                onAction="#goToServices"/>
+        <Button text="Статистика"   styleClass="nav-tab nav-tab-active" onAction="#goToStats"/>
+        <Button text="Архив"        styleClass="nav-tab"                onAction="#goToArchive"/>
+        <Button text="Профиль"      styleClass="nav-tab"                onAction="#goToProfile"/>
+    </HBox>
+
+    <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" styleClass="content-scroll">
+        <VBox styleClass="page-content" spacing="24">
+
+            <VBox spacing="4">
+                <Label text="Аналитика" styleClass="page-title"/>
+                <Label text="Показатели работы ателье" styleClass="page-subtitle"/>
+            </VBox>
+
+            <HBox spacing="14">
+                <VBox styleClass="stat-card-new stat-accent-gold" HBox.hgrow="ALWAYS" spacing="8">
+                    <Label text="💰  Общая выручка" styleClass="stat-card-label"/>
+                    <Label fx:id="totalRevenueLabel" text="—" styleClass="stat-card-value-lg"/>
+                </VBox>
+                <VBox styleClass="stat-card-new stat-accent-blue" HBox.hgrow="ALWAYS" spacing="8">
+                    <Label text="📋  Всего заказов" styleClass="stat-card-label"/>
+                    <Label fx:id="totalOrdersLabel" text="—" styleClass="stat-card-value"/>
+                </VBox>
+                <VBox styleClass="stat-card-new stat-accent-green" HBox.hgrow="ALWAYS" spacing="8">
+                    <Label text="💵  Средний чек" styleClass="stat-card-label"/>
+                    <Label fx:id="avgOrderLabel" text="—" styleClass="stat-card-value"/>
+                </VBox>
+                <VBox styleClass="stat-card-new stat-accent-purple" HBox.hgrow="ALWAYS" spacing="8">
+                    <Label text="👤  Клиентов" styleClass="stat-card-label"/>
+                    <Label fx:id="totalClientsLabel" text="—" styleClass="stat-card-value"/>
+                </VBox>
+            </HBox>
+
+            <VBox styleClass="chart-card-new">
+                <Label text="📈  Заявки за последние 14 дней" styleClass="page-subtitle"
+                       style="-fx-font-weight:bold; -fx-padding: 0 0 8 0;"/>
+                <LineChart fx:id="ordersLineChart" prefHeight="260" animated="true" createSymbols="true">
+                    <xAxis><CategoryAxis fx:id="lineXAxis"/></xAxis>
+                    <yAxis><NumberAxis fx:id="lineYAxis" minorTickVisible="false"/></yAxis>
+                </LineChart>
+            </VBox>
+
+            <HBox spacing="16">
+                <VBox styleClass="chart-card-new" HBox.hgrow="ALWAYS">
+                    <PieChart fx:id="statusPieChart" prefHeight="300" animated="true"/>
+                </VBox>
+                <VBox styleClass="chart-card-new" HBox.hgrow="ALWAYS">
+                    <BarChart fx:id="revenueBarChart" prefHeight="300" animated="true">
+                        <xAxis><CategoryAxis fx:id="barXAxis"/></xAxis>
+                        <yAxis><NumberAxis fx:id="barYAxis"/></yAxis>
+                    </BarChart>
+                </VBox>
+            </HBox>
+        </VBox>
+    </ScrollPane>
+</VBox>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:id="serviceCard"
+      styleClass="service-card-new"
+      spacing="0"
+      prefWidth="260">
+
+    <StackPane styleClass="service-card-image-wrap" prefHeight="140">
+        <ImageView fx:id="cardImage" fitWidth="260" fitHeight="140"
+                   preserveRatio="false" styleClass="service-card-img"/>
+        <VBox fx:id="cardImagePlaceholder" alignment="CENTER" styleClass="service-card-placeholder" visible="false" managed="false">
+            <Label text="🔧" styleClass="placeholder-icon"/>
+        </VBox>
+
+        <Label fx:id="cardCategory" styleClass="service-card-category-badge"
+               StackPane.alignment="TOP_LEFT"/>
+    </StackPane>
+
+    <VBox spacing="10" styleClass="service-card-content">
+        <Label fx:id="cardName" styleClass="service-card-name" wrapText="true"/>
+        <Label fx:id="cardDesc" styleClass="service-card-desc" wrapText="true" maxHeight="48"/>
+
+        <HBox alignment="CENTER_LEFT" spacing="0">
+            <Label fx:id="cardPrice" styleClass="service-card-price" HBox.hgrow="ALWAYS"/>
+            <Button fx:id="cardOrderBtn" text="Заказать →"
+                    styleClass="service-card-btn" onAction="#handleOrderClick"/>
+        </HBox>
+    </VBox>
+</VBox>

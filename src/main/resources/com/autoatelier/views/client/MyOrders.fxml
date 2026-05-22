@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      prefWidth="1200" prefHeight="800"
+      fx:controller="com.autoatelier.controller.client.ClientMyOrdersController"
+      styleClass="app-root" spacing="0">
+
+    <HBox styleClass="topbar-header" alignment="CENTER_LEFT">
+        <Label text="🚗 Ателье Автомобилей" styleClass="topbar-logo"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Label fx:id="userNameLabel" styleClass="topbar-username" visible="false" managed="false"/>
+        <Button text="Выйти" styleClass="topbar-logout-btn" onAction="#handleLogout"/>
+    </HBox>
+
+    <HBox styleClass="topbar-nav" spacing="0">
+        <Button text="Каталог"         styleClass="nav-tab"                onAction="#goToCatalog"/>
+        <Button text="Новая заявка"    styleClass="nav-tab"                onAction="#goToNewOrder"/>
+        <Button text="Мои заказы"      styleClass="nav-tab nav-tab-active" onAction="#goToOrders"/>
+        <Button text="История оплат"   styleClass="nav-tab"                onAction="#goToPayHistory"/>
+        <Button text="Профиль"         styleClass="nav-tab"                onAction="#goToProfile"/>
+    </HBox>
+
+    <HBox VBox.vgrow="ALWAYS" spacing="20" styleClass="page-content">
+
+        <VBox spacing="14" HBox.hgrow="ALWAYS">
+            <HBox alignment="CENTER_LEFT" spacing="12">
+                <Label text="Мои заявки" styleClass="page-title" HBox.hgrow="ALWAYS"/>
+                <Button text="Обновить" styleClass="btn-outline" onAction="#refresh"/>
+                <Button text="+ Новая заявка" styleClass="btn-primary-sm" onAction="#goToNewOrder"/>
+            </HBox>
+            <Label fx:id="statusLabel" styleClass="page-subtitle"/>
+
+            <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" styleClass="content-scroll">
+                <VBox fx:id="ordersListBox" spacing="10" styleClass="orders-list"/>
+            </ScrollPane>
+        </VBox>
+
+        <VBox fx:id="detailPane" spacing="16" styleClass="detail-panel-new"
+              minWidth="320" maxWidth="360"
+              visible="false" managed="false">
+            <Label text="Детали заявки" styleClass="detail-panel-title"/>
+            <Separator styleClass="detail-sep"/>
+
+            <VBox spacing="14">
+                <VBox spacing="4">
+                    <Label text="УСЛУГА" styleClass="detail-field-label"/>
+                    <Label fx:id="detailService" styleClass="detail-field-value" wrapText="true"/>
+                </VBox>
+                <VBox spacing="4">
+                    <Label text="АВТОМОБИЛЬ" styleClass="detail-field-label"/>
+                    <Label fx:id="detailCar" styleClass="detail-field-value"/>
+                </VBox>
+                <VBox spacing="4">
+                    <Label text="СТАТУС" styleClass="detail-field-label"/>
+                    <Label fx:id="detailStatus" styleClass="detail-field-value detail-status"/>
+                </VBox>
+                <VBox spacing="4">
+                    <Label text="СТОИМОСТЬ" styleClass="detail-field-label"/>
+                    <Label fx:id="detailPrice" styleClass="detail-field-price"/>
+                </VBox>
+                <VBox spacing="4">
+                    <Label text="ОПИСАНИЕ" styleClass="detail-field-label"/>
+                    <Label fx:id="detailDescription" styleClass="detail-field-value" wrapText="true"/>
+                </VBox>
+                <Separator styleClass="detail-sep"/>
+                <VBox spacing="4">
+                    <Label text="КОММЕНТАРИЙ МАСТЕРА" styleClass="detail-field-label"/>
+                    <Label fx:id="detailComment" styleClass="detail-comment-box" wrapText="true"/>
+                </VBox>
+            </VBox>
+
+            <Separator styleClass="detail-sep"/>
+
+            <Button fx:id="cancelOrderBtn" text="✕  Отменить заявку"
+                    styleClass="btn-danger" maxWidth="Infinity"
+                    onAction="#handleCancelOrder"
+                    visible="false" managed="false"/>
+
+            <Button fx:id="repeatOrderBtn" text="↺  Повторить заявку"
+                    styleClass="btn-outline" maxWidth="Infinity"
+                    onAction="#handleRepeatOrder"
+                    visible="false" managed="false"/>
+        </VBox>
+    </HBox>
+</VBox>

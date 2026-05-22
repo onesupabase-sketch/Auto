@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:id="orderCard"
+      styleClass="order-card"
+      spacing="0"
+      fx:controller="com.autoatelier.controller.components.OrderCardController">
+
+    <HBox spacing="0" VBox.vgrow="ALWAYS">
+
+        <Rectangle fx:id="statusBar" width="4" height="76"
+                   arcWidth="4" arcHeight="4"/>
+
+        <VBox spacing="8" styleClass="order-card-body" HBox.hgrow="ALWAYS">
+
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <Label fx:id="cardServiceName"
+                       styleClass="order-card-service"
+                       HBox.hgrow="ALWAYS" wrapText="true"/>
+                <Label fx:id="cardStatus"
+                       styleClass="order-card-status-badge"/>
+            </HBox>
+
+            <HBox spacing="6" alignment="CENTER_LEFT">
+                <Label text="🚗" styleClass="order-card-icon"/>
+                <Label fx:id="cardCarInfo" styleClass="order-card-meta"/>
+            </HBox>
+
+            <HBox alignment="CENTER_LEFT" spacing="0">
+                <Label fx:id="cardPrice"
+                       styleClass="order-card-price"
+                       HBox.hgrow="ALWAYS"/>
+                <Label fx:id="cardDate" styleClass="order-card-date"/>
+            </HBox>
+
+            <HBox fx:id="commentRow" spacing="6" alignment="CENTER_LEFT"
+                  visible="false" managed="false">
+                <Label text="💬" styleClass="order-card-icon"/>
+                <Label fx:id="cardComment"
+                       styleClass="order-card-comment"
+                       wrapText="true" HBox.hgrow="ALWAYS"/>
+            </HBox>
+
+        </VBox>
+    </HBox>
+</VBox>

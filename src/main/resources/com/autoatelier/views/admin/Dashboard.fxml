@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      prefWidth="1200" prefHeight="800"
+      fx:controller="com.autoatelier.controller.admin.AdminDashboardController"
+      styleClass="app-root" spacing="0">
+
+    <HBox styleClass="topbar-header topbar-admin" alignment="CENTER_LEFT" spacing="12">
+        <Label text="🚗 Ателье Автомобилей" styleClass="topbar-logo"/>
+        <Label text="Администратор" styleClass="topbar-role-badge topbar-role-admin"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Label fx:id="userNameLabel" styleClass="topbar-username" visible="false" managed="false"/>
+        <Button text="Выйти" styleClass="topbar-logout-btn" onAction="#handleLogout"/>
+    </HBox>
+
+    <HBox styleClass="topbar-nav" spacing="0">
+        <Button text="Пользователи" styleClass="nav-tab"                onAction="#goToUsers"/>
+        <Button text="Услуги"       styleClass="nav-tab"                onAction="#goToServices"/>
+        <Button text="Статистика"   styleClass="nav-tab"                onAction="#goToStats"/>
+        <Button text="Архив"        styleClass="nav-tab"                onAction="#goToArchive"/>
+        <Button text="Профиль"      styleClass="nav-tab"                onAction="#goToProfile"/>
+    </HBox>
+
+    <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" styleClass="content-scroll">
+        <VBox styleClass="page-content" spacing="28">
+
+            <VBox spacing="4">
+                <Label text="Панель администратора" styleClass="page-title"/>
+                <Label text="Полный контроль над системой ателье" styleClass="page-subtitle"/>
+            </VBox>
+
+            <VBox spacing="12">
+                <Label text="Статистика по заказам" styleClass="section-title"/>
+                <HBox spacing="14">
+                    <VBox styleClass="stat-card-new stat-accent-blue" HBox.hgrow="ALWAYS" spacing="8">
+                        <Label text="📋  Всего заказов" styleClass="stat-card-label"/>
+                        <Label fx:id="totalOrdersLabel" text="—" styleClass="stat-card-value"/>
+                    </VBox>
+                    <VBox styleClass="stat-card-new stat-accent-sky" HBox.hgrow="ALWAYS" spacing="8">
+                        <Label text="🆕  Новые" styleClass="stat-card-label"/>
+                        <Label fx:id="newOrdersLabel" text="—" styleClass="stat-card-value"/>
+                    </VBox>
+                    <VBox styleClass="stat-card-new stat-accent-amber" HBox.hgrow="ALWAYS" spacing="8">
+                        <Label text="⚙️  В работе" styleClass="stat-card-label"/>
+                        <Label fx:id="inProgressLabel" text="—" styleClass="stat-card-value"/>
+                    </VBox>
+                    <VBox styleClass="stat-card-new stat-accent-green" HBox.hgrow="ALWAYS" spacing="8">
+                        <Label text="✅  Завершено" styleClass="stat-card-label"/>
+                        <Label fx:id="completedLabel" text="—" styleClass="stat-card-value"/>
+                    </VBox>
+                    <VBox styleClass="stat-card-new stat-accent-red" HBox.hgrow="ALWAYS" spacing="8">
+                        <Label text="❌  Отменено" styleClass="stat-card-label"/>
+                        <Label fx:id="cancelledLabel" text="—" styleClass="stat-card-value"/>
+                    </VBox>
+                </HBox>
+            </VBox>
+
+            <HBox spacing="14">
+                <VBox styleClass="stat-card-new stat-accent-purple" HBox.hgrow="ALWAYS" spacing="8">
+                    <Label text="👥  Пользователей" styleClass="stat-card-label"/>
+                    <Label fx:id="totalUsersLabel" text="—" styleClass="stat-card-value"/>
+                </VBox>
+                <VBox styleClass="stat-card-new stat-accent-gold" HBox.hgrow="ALWAYS" spacing="8">
+                    <Label text="💰  Общая выручка" styleClass="stat-card-label"/>
+                    <Label fx:id="totalRevenueLabel" text="—" styleClass="stat-card-value-lg"/>
+                </VBox>
+            </HBox>
+
+        </VBox>
+    </ScrollPane>
+</VBox>

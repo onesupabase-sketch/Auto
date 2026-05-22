@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      prefWidth="1200" prefHeight="800"
+      fx:controller="com.autoatelier.controller.admin.AdminProfileController"
+      styleClass="app-root" spacing="0">
+
+    <HBox styleClass="topbar-header topbar-admin" alignment="CENTER_LEFT" spacing="12">
+        <Label text="🚗 Ателье Автомобилей" styleClass="topbar-logo"/>
+        <Label text="Администратор" styleClass="topbar-role-badge topbar-role-admin"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Label fx:id="userNameLabel" styleClass="topbar-username" visible="false" managed="false"/>
+        <Button text="Выйти" styleClass="topbar-logout-btn" onAction="#handleLogout"/>
+    </HBox>
+
+    <HBox styleClass="topbar-nav" spacing="0">
+        <Button text="Пользователи" styleClass="nav-tab"                onAction="#goToUsers"/>
+        <Button text="Услуги"       styleClass="nav-tab"                onAction="#goToServices"/>
+        <Button text="Статистика"   styleClass="nav-tab"                onAction="#goToStats"/>
+        <Button text="Профиль"      styleClass="nav-tab nav-tab-active" onAction="#goToProfile"/>
+    </HBox>
+
+    <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" styleClass="content-scroll">
+        <VBox styleClass="page-content" spacing="24">
+
+            <VBox spacing="4">
+                <Label text="Профиль" styleClass="page-title"/>
+                <Label fx:id="emailLabel" styleClass="profile-email"/>
+            </VBox>
+
+            <VBox styleClass="profile-section" spacing="16">
+                <Label text="Личные данные" styleClass="profile-section-title"/>
+                <Separator styleClass="detail-sep"/>
+                <HBox spacing="16">
+                    <VBox spacing="6" HBox.hgrow="ALWAYS">
+                        <Label text="ИМЯ И ФАМИЛИЯ" styleClass="form-label-new"/>
+                        <TextField fx:id="nameField" promptText="Иван Иванов" styleClass="input-field"/>
+                    </VBox>
+                    <VBox spacing="6" HBox.hgrow="ALWAYS">
+                        <Label text="ТЕЛЕФОН" styleClass="form-label-new"/>
+                        <TextField fx:id="phoneField" promptText="+7 (999) 000-00-00" styleClass="input-field"/>
+                    </VBox>
+                </HBox>
+                <HBox alignment="CENTER_LEFT" spacing="12">
+                    <Button text="Сохранить изменения" styleClass="btn-primary-sm" onAction="#handleSaveProfile"/>
+                    <Label fx:id="profileStatus" styleClass="status-hint"/>
+                </HBox>
+            </VBox>
+
+            <VBox styleClass="profile-section" spacing="16">
+                <Label text="Безопасность" styleClass="profile-section-title"/>
+                <Separator styleClass="detail-sep"/>
+                <HBox spacing="16">
+                    <VBox spacing="6" HBox.hgrow="ALWAYS">
+                        <Label text="НОВЫЙ ПАРОЛЬ" styleClass="form-label-new"/>
+                        <PasswordField fx:id="newPasswordField" promptText="Минимум 6 символов" styleClass="input-field"/>
+                    </VBox>
+                    <VBox spacing="6" HBox.hgrow="ALWAYS">
+                        <Label text="ПОДТВЕРДИТЕ ПАРОЛЬ" styleClass="form-label-new"/>
+                        <PasswordField fx:id="confirmPasswordField" promptText="Повторите пароль" styleClass="input-field"/>
+                    </VBox>
+                </HBox>
+                <HBox alignment="CENTER_LEFT" spacing="12">
+                    <Button text="Изменить пароль" styleClass="btn-outline" onAction="#handleChangePassword"/>
+                    <Label fx:id="passwordStatus" styleClass="status-hint"/>
+                </HBox>
+            </VBox>
+
+        </VBox>
+    </ScrollPane>
+</VBox>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      prefWidth="1200" prefHeight="800"
+      fx:controller="com.autoatelier.controller.client.ClientPaymentHistoryController"
+      styleClass="app-root" spacing="0">
+
+    <HBox styleClass="topbar-header" alignment="CENTER_LEFT">
+        <Label text="🚗 Ателье Автомобилей" styleClass="topbar-logo"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Label fx:id="userNameLabel" styleClass="topbar-username" visible="false" managed="false"/>
+        <Button text="Выйти" styleClass="topbar-logout-btn" onAction="#handleLogout"/>
+    </HBox>
+
+    <HBox styleClass="topbar-nav" spacing="0">
+        <Button text="Каталог"        styleClass="nav-tab"                onAction="#goToCatalog"/>
+        <Button text="Новая заявка"   styleClass="nav-tab"                onAction="#goToNewOrder"/>
+        <Button text="Мои заказы"     styleClass="nav-tab"                onAction="#goToOrders"/>
+        <Button text="История оплат"  styleClass="nav-tab nav-tab-active" onAction="#goToPayHistory"/>
+        <Button text="Профиль"        styleClass="nav-tab"                onAction="#goToProfile"/>
+    </HBox>
+
+    <VBox VBox.vgrow="ALWAYS" spacing="16" styleClass="page-content">
+        <HBox alignment="CENTER_LEFT" spacing="12">
+            <Label text="💳  История оплат" styleClass="page-title" HBox.hgrow="ALWAYS"/>
+            <Button text="Обновить" styleClass="btn-outline" onAction="#refresh"/>
+        </HBox>
+
+        <HBox spacing="16">
+            <Label fx:id="statusLabel" styleClass="page-subtitle" HBox.hgrow="ALWAYS"/>
+            <Label fx:id="totalLabel"  styleClass="stat-card-value"
+                   style="-fx-text-fill: #27AE60; -fx-font-size: 16px; -fx-font-weight: bold;"/>
+        </HBox>
+
+        <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" styleClass="content-scroll">
+            <VBox fx:id="historyListBox" spacing="10" styleClass="orders-list"/>
+        </ScrollPane>
+    </VBox>
+</VBox>

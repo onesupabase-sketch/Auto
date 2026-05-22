@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.autoatelier.controller.manager.ManagerCatalogController"
+      styleClass="app-root" spacing="0"
+      prefWidth="1200" prefHeight="800">
+
+    <HBox styleClass="topbar-header topbar-manager" alignment="CENTER_LEFT" spacing="12">
+        <Label text="🚗 Ателье Автомобилей" styleClass="topbar-logo"/>
+        <Label text="Менеджер" styleClass="topbar-role-badge topbar-role-manager"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Label fx:id="userNameLabel" styleClass="topbar-username" visible="false" managed="false"/>
+        <Button text="Выйти" styleClass="topbar-logout-btn" onAction="#handleLogout"/>
+    </HBox>
+
+    <HBox styleClass="topbar-nav" spacing="0">
+        <Button text="Заказы"  styleClass="nav-tab"                onAction="#goToOrders"/>
+        <Button text="Каталог" styleClass="nav-tab nav-tab-active" onAction="#goToCatalog"/>
+        <Button text="Профиль" styleClass="nav-tab"                onAction="#goToProfile"/>
+    </HBox>
+
+    <HBox VBox.vgrow="ALWAYS" spacing="20" styleClass="page-content">
+
+        <VBox spacing="14" HBox.hgrow="ALWAYS">
+            <HBox alignment="CENTER_LEFT" spacing="12">
+                <VBox spacing="4" HBox.hgrow="ALWAYS">
+                    <Label text="Каталог услуг" styleClass="page-title"/>
+                    <Label fx:id="catalogStatus" styleClass="page-subtitle"/>
+                </VBox>
+                <Button text="+ Новая услуга" styleClass="btn-primary-sm" onAction="#handleNew"/>
+            </HBox>
+
+            <HBox spacing="12" alignment="CENTER_LEFT">
+                <TextField fx:id="searchField" promptText="🔍  Поиск по названию..."
+                           styleClass="search-field" prefWidth="280"/>
+                <ComboBox fx:id="categoryFilter" prefWidth="200" styleClass="filter-combo"/>
+                <CheckBox fx:id="showInactiveCheck" text="Показать неактивные"
+                          styleClass="check-styled" onAction="#applyFilter"/>
+            </HBox>
+
+            <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" styleClass="content-scroll">
+                <VBox fx:id="servicesListBox" spacing="10" styleClass="orders-list"/>
+            </ScrollPane>
+        </VBox>
+
+        <VBox fx:id="editPane" spacing="14" styleClass="detail-panel-new" minWidth="340" maxWidth="380">
+            <Label fx:id="editPaneTitle" text="Новая услуга" styleClass="detail-panel-title"/>
+            <Separator styleClass="detail-sep"/>
+
+            <VBox spacing="8">
+                <Label text="НАЗВАНИЕ *" styleClass="form-label-new"/>
+                <TextField fx:id="nameField" promptText="Название услуги" styleClass="input-field"/>
+            </VBox>
+            <VBox spacing="8">
+                <Label text="КАТЕГОРИЯ" styleClass="form-label-new"/>
+                <ComboBox fx:id="categoryCombo" maxWidth="Infinity" styleClass="input-field" editable="true"/>
+            </VBox>
+            <VBox spacing="8">
+                <Label text="ЦЕНА (₽)  |  0 = По запросу" styleClass="form-label-new"/>
+                <TextField fx:id="priceField" promptText="0" styleClass="input-field"/>
+            </VBox>
+            <VBox spacing="8">
+                <Label text="ОПИСАНИЕ" styleClass="form-label-new"/>
+                <TextArea fx:id="descriptionArea" prefRowCount="4" styleClass="input-textarea"
+                          promptText="Опишите услугу..."/>
+            </VBox>
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <CheckBox fx:id="activeCheck" text="Услуга активна (видна клиентам)"
+                          selected="true" styleClass="check-styled"/>
+            </HBox>
+
+            <Label fx:id="formStatus" styleClass="page-subtitle" wrapText="true"/>
+
+            <HBox spacing="10">
+                <Button fx:id="saveButton" text="Сохранить" styleClass="btn-primary-lg"
+                        onAction="#handleSave" HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
+                <Button fx:id="deleteButton" text="🗑" styleClass="btn-danger-sm"
+                        onAction="#handleDelete" disable="true"/>
+            </HBox>
+            <Button text="Отмена" styleClass="btn-outline" onAction="#handleCancelEdit"
+                    maxWidth="Infinity"/>
+        </VBox>
+    </HBox>
+</VBox>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.autoatelier.controller.manager.ManagerOrdersController"
+      styleClass="app-root" spacing="0"
+      prefWidth="1200" prefHeight="800">
+
+    <HBox styleClass="topbar-header topbar-manager" alignment="CENTER_LEFT" spacing="12">
+        <Label text="🚗 Ателье Автомобилей" styleClass="topbar-logo"/>
+        <Label text="Менеджер" styleClass="topbar-role-badge topbar-role-manager"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Label fx:id="userNameLabel" styleClass="topbar-username" visible="false" managed="false"/>
+        <Button text="Выйти" styleClass="topbar-logout-btn" onAction="#handleLogout"/>
+    </HBox>
+
+    <HBox styleClass="topbar-nav" spacing="0">
+        <Button text="Заказы"  styleClass="nav-tab nav-tab-active" onAction="#goToOrders"/>
+        <Button text="Каталог" styleClass="nav-tab"                onAction="#goToCatalog"/>
+        <Button text="Профиль" styleClass="nav-tab"                onAction="#goToProfile"/>
+    </HBox>
+
+    <HBox VBox.vgrow="ALWAYS" spacing="20" styleClass="page-content">
+
+        <VBox spacing="14" HBox.hgrow="ALWAYS">
+            <HBox alignment="CENTER_LEFT" spacing="12">
+                <Label text="Заказы клиентов" styleClass="page-title" HBox.hgrow="ALWAYS"/>
+                <ComboBox fx:id="filterCombo" prefWidth="140" styleClass="filter-combo"/>
+                <Button text="Обновить" styleClass="btn-outline" onAction="#refresh"/>
+            </HBox>
+
+            <HBox spacing="8" alignment="CENTER_LEFT">
+                <Label text="Поиск клиента:" styleClass="form-label-new"/>
+                <TextField fx:id="clientSearchField" promptText="Имя или телефон..."
+                           styleClass="input-field" prefWidth="260"
+                           HBox.hgrow="ALWAYS"/>
+                <Button text="Найти" styleClass="btn-primary-sm" onAction="#handleClientSearch"/>
+                <Button text="Сбросить" styleClass="btn-outline" onAction="#handleSearchReset"/>
+            </HBox>
+
+            <Label fx:id="statusLabel" styleClass="page-subtitle"/>
+
+            <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" styleClass="content-scroll">
+                <VBox fx:id="ordersListBox" spacing="10" styleClass="orders-list"/>
+            </ScrollPane>
+        </VBox>
+
+        <VBox fx:id="detailPane" spacing="16" styleClass="detail-panel-new" minWidth="320" maxWidth="360">
+            <Label text="Обработка заявки" styleClass="detail-panel-title"/>
+            <Separator styleClass="detail-sep"/>
+
+            <VBox spacing="10">
+                <VBox spacing="4">
+                    <Label text="КЛИЕНТ" styleClass="detail-field-label"/>
+                    <Label fx:id="detailClient" styleClass="detail-field-value"/>
+                </VBox>
+                <VBox spacing="4">
+                    <Label text="УСЛУГА" styleClass="detail-field-label"/>
+                    <Label fx:id="detailService" styleClass="detail-field-value" wrapText="true"/>
+                </VBox>
+                <VBox spacing="4">
+                    <Label text="АВТОМОБИЛЬ" styleClass="detail-field-label"/>
+                    <Label fx:id="detailCar" styleClass="detail-field-value"/>
+                </VBox>
+                <VBox spacing="4">
+                    <Label text="ОПИСАНИЕ КЛИЕНТА" styleClass="detail-field-label"/>
+                    <Label fx:id="detailDescription" styleClass="detail-comment-box" wrapText="true"/>
+                </VBox>
+                <VBox spacing="4">
+                    <Label text="ТЕКУЩАЯ ЦЕНА" styleClass="detail-field-label"/>
+                    <Label fx:id="detailPrice" styleClass="detail-field-price"/>
+                </VBox>
+            </VBox>
+
+            <Separator styleClass="detail-sep"/>
+
+            <VBox spacing="10">
+                <VBox spacing="6">
+                    <Label text="ИЗМЕНИТЬ СТАТУС" styleClass="form-label-new"/>
+                    <ComboBox fx:id="statusCombo" maxWidth="Infinity" styleClass="input-field"/>
+                </VBox>
+                <VBox spacing="6">
+                    <Label text="УТОЧНИТЬ СТОИМОСТЬ (₽)" styleClass="form-label-new"/>
+                    <TextField fx:id="priceField" promptText="Введите сумму" styleClass="input-field"/>
+                </VBox>
+                <VBox spacing="6">
+                    <Label text="КОММЕНТАРИЙ ДЛЯ КЛИЕНТА" styleClass="form-label-new"/>
+                    <TextArea fx:id="commentArea" prefRowCount="3" styleClass="input-textarea"
+                              promptText="Сообщите клиенту о ходе работ..."/>
+                </VBox>
+            </VBox>
+
+            <HBox spacing="10">
+                <Button fx:id="saveButton" text="Сохранить" styleClass="btn-primary-lg"
+                        onAction="#handleSave" HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
+                <Button text="Отмена" styleClass="btn-outline" onAction="#handleCancel"/>
+            </HBox>
+        </VBox>
+    </HBox>
+</VBox>

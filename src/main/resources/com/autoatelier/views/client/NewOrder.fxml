@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      prefWidth="1200" prefHeight="800"
+      fx:controller="com.autoatelier.controller.client.ClientNewOrderController"
+      styleClass="app-root" spacing="0">
+
+    <HBox styleClass="topbar-header" alignment="CENTER_LEFT">
+        <Label text="🚗 Ателье Автомобилей" styleClass="topbar-logo"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Label fx:id="userNameLabel" styleClass="topbar-username" visible="false" managed="false"/>
+        <Button text="Выйти" styleClass="topbar-logout-btn" onAction="#handleLogout"/>
+    </HBox>
+
+    <HBox styleClass="topbar-nav" spacing="0">
+        <Button text="Каталог"      styleClass="nav-tab"                onAction="#goToCatalog"/>
+        <Button text="Новая заявка" styleClass="nav-tab nav-tab-active" onAction="#goToNewOrder"/>
+        <Button text="Мои заказы"   styleClass="nav-tab"                onAction="#goToOrders"/>
+        <Button text="История оплат" styleClass="nav-tab"                onAction="#goToPayHistory"/>
+        <Button text="Профиль"      styleClass="nav-tab"                onAction="#goToProfile"/>
+    </HBox>
+
+    <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" styleClass="content-scroll">
+        <VBox styleClass="page-content" spacing="0">
+            <HBox spacing="32" alignment="TOP_LEFT">
+
+                <VBox spacing="24" HBox.hgrow="ALWAYS">
+
+                    <VBox spacing="4">
+                        <Label text="Новая заявка" styleClass="page-title"/>
+                        <Label text="Заполните данные — менеджер свяжется с вами в течение часа"
+                               styleClass="page-subtitle"/>
+                    </VBox>
+
+                    <VBox styleClass="order-step-card" spacing="14">
+                        <HBox spacing="12" alignment="CENTER_LEFT">
+                            <Label text="1" styleClass="step-number"/>
+                            <Label text="Выберите услугу" styleClass="step-title"/>
+                        </HBox>
+                        <VBox spacing="6">
+                            <Label text="УСЛУГА" styleClass="form-label-new"/>
+                            <ComboBox fx:id="serviceCombo" maxWidth="Infinity" styleClass="input-field-lg"/>
+                        </VBox>
+                        <HBox fx:id="priceRow" spacing="10" alignment="CENTER_LEFT"
+                              visible="false" managed="false"
+                              styleClass="price-info-row">
+                            <Label text="💰" styleClass="price-row-icon"/>
+                            <Label text="Стоимость:" styleClass="price-row-label"/>
+                            <Label fx:id="priceLabel" styleClass="price-row-value"/>
+                        </HBox>
+                    </VBox>
+
+                    <VBox styleClass="order-step-card" spacing="14">
+                        <HBox spacing="12" alignment="CENTER_LEFT">
+                            <Label text="2" styleClass="step-number"/>
+                            <Label text="Ваш автомобиль" styleClass="step-title"/>
+                        </HBox>
+                        <HBox spacing="16">
+                            <VBox spacing="6" HBox.hgrow="ALWAYS">
+                                <Label text="МАРКА И МОДЕЛЬ" styleClass="form-label-new"/>
+                                <TextField fx:id="carModelField"
+                                           promptText="Например: BMW M3 Competition"
+                                           styleClass="input-field-lg"/>
+                            </VBox>
+                            <VBox spacing="6" minWidth="140">
+                                <Label text="ГОД ВЫПУСКА" styleClass="form-label-new"/>
+                                <TextField fx:id="carYearField" promptText="2022"
+                                           styleClass="input-field-lg"/>
+                            </VBox>
+                        </HBox>
+                        <VBox spacing="6">
+                            <Label text="ПОЖЕЛАНИЯ И ДЕТАЛИ" styleClass="form-label-new"/>
+                            <TextArea fx:id="descriptionArea"
+                                      promptText="Опишите что именно хотите сделать. Чем подробнее — тем точнее оценка."
+                                      prefRowCount="4" styleClass="input-textarea"/>
+                        </VBox>
+                    </VBox>
+
+                    <VBox styleClass="order-step-card" spacing="14">
+                        <HBox spacing="12" alignment="CENTER_LEFT">
+                            <Label text="3" styleClass="step-number"/>
+                            <Label text="Карта для оплаты" styleClass="step-title"/>
+                        </HBox>
+                        <Label text="Выберите привязанную карту. Оплата будет произведена после завершения работ."
+                               styleClass="page-subtitle" wrapText="true"/>
+
+                        <VBox fx:id="noCardsBox" spacing="10"
+                              styleClass="no-cards-required" visible="true" managed="true">
+                            <HBox spacing="10" alignment="CENTER_LEFT">
+                                <Label text="⚠️" styleClass="hint-icon"/>
+                                <Label text="У вас нет привязанных карт — оплата невозможна"
+                                       styleClass="no-card-warning" wrapText="true"/>
+                            </HBox>
+                            <Button text="Добавить карту →" styleClass="btn-add-card"
+                                    onAction="#goToProfile"/>
+                        </VBox>
+
+                        <VBox fx:id="cardsBox" spacing="8" visible="false" managed="false">
+                            <ComboBox fx:id="cardCombo" maxWidth="Infinity"
+                                      styleClass="input-field-lg" promptText="Выберите карту"/>
+                        </VBox>
+                    </VBox>
+
+                    <Label fx:id="errorLabel" styleClass="form-error"
+                           visible="false" managed="false" wrapText="true"/>
+
+                    <HBox spacing="12">
+                        <Button fx:id="submitButton" text="✓  Отправить заявку"
+                                styleClass="btn-submit-order" onAction="#handleSubmit"/>
+                        <Button text="Отмена" styleClass="btn-outline" onAction="#goToCatalog"/>
+                    </HBox>
+                </VBox>
+
+                <VBox spacing="16" minWidth="260" maxWidth="300" styleClass="order-hint-panel">
+                    <Label text="Как это работает?" styleClass="hint-panel-title"/>
+                    <Separator styleClass="detail-sep"/>
+
+                    <VBox spacing="16">
+                        <HBox spacing="12" alignment="TOP_LEFT">
+                            <Label text="📋" styleClass="hint-icon"/>
+                            <VBox spacing="2">
+                                <Label text="Заявка принята" styleClass="hint-step-title"/>
+                                <Label text="Менеджер рассматривает вашу заявку и уточняет детали"
+                                       styleClass="hint-step-desc" wrapText="true"/>
+                            </VBox>
+                        </HBox>
+                        <HBox spacing="12" alignment="TOP_LEFT">
+                            <Label text="⚙️" styleClass="hint-icon"/>
+                            <VBox spacing="2">
+                                <Label text="Работа в процессе" styleClass="hint-step-title"/>
+                                <Label text="Наши мастера выполняют заказ. Вы получаете уведомление о статусе"
+                                       styleClass="hint-step-desc" wrapText="true"/>
+                            </VBox>
+                        </HBox>
+                        <HBox spacing="12" alignment="TOP_LEFT">
+                            <Label text="✅" styleClass="hint-icon"/>
+                            <VBox spacing="2">
+                                <Label text="Готово и оплата" styleClass="hint-step-title"/>
+                                <Label text="Забираете автомобиль и оплачиваете выполненную работу"
+                                       styleClass="hint-step-desc" wrapText="true"/>
+                            </VBox>
+                        </HBox>
+                    </VBox>
+
+                    <Separator styleClass="detail-sep"/>
+                    <Label text="📞 Остались вопросы?" styleClass="hint-panel-title"/>
+                    <Label text="Позвоните нам или напишите в описании заявки — ответим быстро"
+                           styleClass="hint-step-desc" wrapText="true"/>
+                </VBox>
+
+            </HBox>
+        </VBox>
+    </ScrollPane>
+</VBox>

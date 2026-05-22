@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:id="statCard"
+      styleClass="stat-card-new"
+      spacing="6"
+      alignment="CENTER_LEFT">
+
+    <HBox spacing="12" alignment="CENTER_LEFT">
+        <Label fx:id="cardIcon" styleClass="stat-card-icon"/>
+        <VBox spacing="2">
+            <Label fx:id="cardLabel" styleClass="stat-card-label"/>
+            <Label fx:id="cardValue" styleClass="stat-card-value"/>
+        </VBox>
+    </HBox>
+
+    <Label fx:id="cardSubtext" styleClass="stat-card-subtext" wrapText="true" visible="false" managed="false"/>
+</VBox>

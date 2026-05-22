@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      prefWidth="1200" prefHeight="800"
+      fx:controller="com.autoatelier.controller.admin.AdminServicesController"
+      styleClass="app-root" spacing="0">
+
+    <HBox styleClass="topbar-header topbar-admin" alignment="CENTER_LEFT" spacing="12">
+        <Label text="🚗 Ателье Автомобилей" styleClass="topbar-logo"/>
+        <Label text="Администратор" styleClass="topbar-role-badge topbar-role-admin"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Label fx:id="userNameLabel" styleClass="topbar-username" visible="false" managed="false"/>
+        <Button text="Выйти" styleClass="topbar-logout-btn" onAction="#handleLogout"/>
+    </HBox>
+
+    <HBox styleClass="topbar-nav" spacing="0">
+        <Button text="Пользователи" styleClass="nav-tab"                onAction="#goToUsers"/>
+        <Button text="Услуги"       styleClass="nav-tab nav-tab-active" onAction="#goToServices"/>
+        <Button text="Статистика"   styleClass="nav-tab"                onAction="#goToStats"/>
+        <Button text="Архив"        styleClass="nav-tab"                onAction="#goToArchive"/>
+        <Button text="Профиль"      styleClass="nav-tab"                onAction="#goToProfile"/>
+    </HBox>
+
+    <HBox VBox.vgrow="ALWAYS" spacing="20" styleClass="page-content">
+
+        <VBox spacing="14" HBox.hgrow="ALWAYS">
+            <HBox alignment="CENTER_LEFT" spacing="12">
+                <VBox spacing="4" HBox.hgrow="ALWAYS">
+                    <Label text="Каталог услуг" styleClass="page-title"/>
+                    <Label fx:id="formStatus" styleClass="page-subtitle"/>
+                </VBox>
+                <Button text="+ Новая услуга" styleClass="btn-primary-sm" onAction="#handleNew"/>
+            </HBox>
+            <TableView fx:id="servicesTable" VBox.vgrow="ALWAYS" styleClass="data-table">
+                <columns>
+                    <TableColumn fx:id="colName"     text="Название"  prefWidth="210"/>
+                    <TableColumn fx:id="colCategory" text="Категория" prefWidth="140"/>
+                    <TableColumn fx:id="colPrice"    text="Цена"      prefWidth="110"/>
+                    <TableColumn fx:id="colActive"   text="Активна"   prefWidth="90"/>
+                </columns>
+                <placeholder><Label text="Нет услуг" styleClass="page-subtitle"/></placeholder>
+            </TableView>
+        </VBox>
+
+        <VBox spacing="14" styleClass="detail-panel-new" minWidth="320" maxWidth="360">
+            <Label text="Редактировать услугу" styleClass="detail-panel-title"/>
+            <Separator styleClass="detail-sep"/>
+
+            <VBox spacing="8">
+                <Label text="НАЗВАНИЕ" styleClass="form-label-new"/>
+                <TextField fx:id="nameField" promptText="Название услуги" styleClass="input-field"/>
+            </VBox>
+            <VBox spacing="8">
+                <Label text="КАТЕГОРИЯ" styleClass="form-label-new"/>
+                <TextField fx:id="categoryField" promptText="Например: Аэродинамика" styleClass="input-field"/>
+            </VBox>
+            <VBox spacing="8">
+                <Label text="ЦЕНА (₽)" styleClass="form-label-new"/>
+                <TextField fx:id="priceField" promptText="0 = По запросу" styleClass="input-field"/>
+            </VBox>
+            <VBox spacing="8">
+                <Label text="ОПИСАНИЕ" styleClass="form-label-new"/>
+                <TextArea fx:id="descriptionArea" prefRowCount="4" styleClass="input-textarea"
+                          promptText="Описание услуги..."/>
+            </VBox>
+
+            <HBox spacing="10">
+                <Button fx:id="saveButton" text="Сохранить" styleClass="btn-primary-lg"
+                        onAction="#handleSave" HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
+                <Button fx:id="deleteButton" text="🗑" styleClass="btn-danger-sm"
+                        onAction="#handleDelete" disable="true"/>
+            </HBox>
+        </VBox>
+    </HBox>
+</VBox>

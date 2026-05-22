@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" styleClass="topbar-wrapper" spacing="0">
+
+    <HBox styleClass="topbar-header" alignment="CENTER_LEFT" spacing="0">
+        <Label text="Ателье Автомобилей" styleClass="topbar-logo"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Label fx:id="topbarUserName" styleClass="topbar-username"/>
+        <Button text="Выйти" styleClass="topbar-logout-btn" onAction="#handleLogout"/>
+    </HBox>
+
+    <HBox fx:id="topbarNav" styleClass="topbar-nav" spacing="0" alignment="CENTER_LEFT">
+
+    </HBox>
+
+</VBox>
